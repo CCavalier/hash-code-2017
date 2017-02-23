@@ -76,7 +76,7 @@ public class App
             ep.dtacenterLatency = Integer.valueOf(vals[0]);
             nbCache = Integer.valueOf(vals[1]);
             System.out.println("ep"+i+" latency:"+ep.dtacenterLatency);
-            System.out.println("ep"+i+" nbCahce:"+nbCache);
+            System.out.println("ep"+i+" nbCache:"+nbCache);
 
             for (int j = 0; j < nbCache; j++) {
                 vals = listLines.get().get(lineRead).split(" ");
@@ -97,9 +97,10 @@ public class App
 
         }
 
+        IntelligenceCache.doTheSmartThing();
 
+        OutputService.writeOutAllTheThings();
 
-
-        System.out.println( "out" );
+        System.out.println( "FINI" );
     }
 }

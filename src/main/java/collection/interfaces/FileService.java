@@ -1,8 +1,10 @@
 package collection.interfaces;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -38,6 +40,16 @@ public class FileService {
 		*/
         // mais c'�tait parce qu'il fallait concat�ner le nom du fichier. On garde �a sous le coude
     }
+
+	public static URI generateURI(String outputFileName) throws URISyntaxException {
+		FileService fileService = new FileService();
+		
+		URL urlInputFile = fileService.getClass().getClassLoader().getResource("kittens.in");
+		
+        URI outputFile = new File(new File(urlInputFile.toURI()).toURI().getPath().substring(0, new File(urlInputFile.toURI()).toURI().getPath().lastIndexOf('.'))+".out").toURI();
+        
+		return outputFile;
+	}
 
 
 

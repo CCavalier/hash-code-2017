@@ -12,22 +12,19 @@ public class OutputService {
 	private static FileService fileService = new FileService();
 	
 	private static URI outputFile;
+
+	private static String chaine = "";
 	
-	public static void writeOutAllTheThings() {
+	public static void writeOutAllTheThings() throws URISyntaxException {
 		String aEcrire = "";
-		
 		String entryFileName = "kittens.in";
-		
 		String entryFileNamePure = entryFileName.substring(0, entryFileName.indexOf("."));
-		
 		String outputFileName = entryFileNamePure + ".out";
 				
-        outputFile = null;
-		try {
-			outputFile = new File(new URI(outputFileName)).toURI();
-		} catch (URISyntaxException e1) {
-			// yoleau
-			e1.printStackTrace();
+		outputFile = FileService.generateURI(outputFileName);
+		
+		if(outputFile == null) {
+			System.err.println("Le fichier de sortie a pas pu être créé!");
 		}
 		
 		// on écrit le nombre de caches qu'on a traité
@@ -45,11 +42,17 @@ public class OutputService {
 			}
 			ecrire(aEcrire);
 		}
+		
+		cetteFoisEcris();
+	}
+
+	private static void ecrire(String valueToWrite) {
+		chaine  += valueToWrite + "\n";
 	}
 	
-	private static void ecrire(String valueToWrite) {
+	private static void cetteFoisEcris() {
 		try {
-			fileService.writeFile(outputFile, valueToWrite);
+			fileService.writeFile(outputFile, chaine);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

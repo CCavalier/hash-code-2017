@@ -9,10 +9,15 @@ public class IntelligenceCache {
 	
 	public static Map<Integer, Set<Integer>> cacheToVideos = new HashMap<Integer, Set<Integer>>();
 	
-	public void doTheSmartThing() {
+	public static void doTheSmartThing() {
 		// il faudrait une liste de choses qu'il nous reste à traiter ; 
 		// 		- genre virer les vidéos trop grandes pour les caches 
 		//		- et les endpoint reliés à aucun cache
+		
+		// on va quand même mettre la vidéo 1 histoire de
+		Set set = new HashSet<Integer>();
+		set.add(2);
+		cacheToVideos.put(1, set);
 	}
 	
 	// -------------------- garbage utils methods ----------------------------
@@ -22,7 +27,7 @@ public class IntelligenceCache {
 	 * @param videoID vidéo à ajouter
 	 * @param cacheID cache auquel ajouter la vidéo
 	 */
-	public void addVideoToCache(Integer cacheID, Integer videoID) {
+	public static void addVideoToCache(Integer cacheID, Integer videoID) {
 		initList(cacheID); // toujours commencer par ça, Justin Case
 		// on ajoute la vidéo à la liste de résultats
 		cacheToVideos.get(cacheID).add(videoID);
@@ -33,7 +38,7 @@ public class IntelligenceCache {
 		App.cacheSize.set(cacheID, tailleRestanteDuCache);
 	}
 	
-	public void initList(Integer cacheID) {
+	private static void initList(Integer cacheID) {
 		if(cacheToVideos.get(cacheID) == null) {
 			cacheToVideos.put(cacheID, new HashSet<Integer>());
 		}
