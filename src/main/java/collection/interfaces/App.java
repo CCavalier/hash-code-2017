@@ -32,15 +32,11 @@ public class App
     public static int request;
 
     public static String KITTEN = "kittens.in";
-
     public static String ZOO = "me_at_the_zoo.in";
     public static String TODAY = "trending_today.in";
     public static String SPREADING = "videos_worth_spreading.in";
 
-    public static  String FILE_CHOOSEN=KITTEN;
-
-
-
+    public static  String FILE_CHOOSEN=SPREADING;
 
     public static void main( String[] args ) throws URISyntaxException {
         FileService fileService = new FileService();
@@ -100,7 +96,7 @@ public class App
             vals = listLines.get().get(lineRead).split(" ");
             lineRead++;
             if(vals == null) break;
-            int idEp =Integer.valueOf(vals[1]);
+            int idEp = Integer.valueOf(vals[1]);
             endpoints.get(idEp).videoToRequests.put(Integer.valueOf(vals[0]), Integer.valueOf(vals[2]));
 
         }
