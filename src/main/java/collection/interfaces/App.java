@@ -37,7 +37,7 @@ public class App
     public static String TODAY = "trending_today.in";
     public static String SPREADING = "videos_worth_spreading.in";
 
-    public static  String FILE_CHOOSEN=KITTEN;
+    public static  String FILE_CHOOSEN=SPREADING;
 
 
 

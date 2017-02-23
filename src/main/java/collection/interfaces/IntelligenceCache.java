@@ -38,21 +38,21 @@ public class IntelligenceCache {
 //		}
 		
 		// on va remplacer des vidéos inutiles par des vidéos random jusqu'à ce qu'il n'y ait plus de vidéo inutiles
-		boolean isVideoInutile = true;
-		while(isVideoInutile) {
-			boolean changement = false;
-			for(cacheID = 0 ; cacheID < App.nbCache ; cacheID++) {
-				// on parcourt les vidéo
-				for ( int videoID = 0; videoID < cacheToVideos.get(cacheID).size() ; videoID ++) {
-					// on regarde si la vidéo courante est inutile
-					if (estVideoInutile(videoID, cacheID)) {
-						deleteVideo(videoID, cacheID);
-						ajouterVideosRandom(cacheID);
-						changement = true;
-					}
+		for(cacheID = 0 ; cacheID < App.nbCache ; cacheID++) {
+			Set<Integer>videos =cacheToVideos.get(cacheID);
+			Set<Integer>videosCp=new HashSet<>(cacheToVideos.get(cacheID));
+			for (int videoID:videosCp){
+				boolean isUseless = false;
+				for (Endpoint endpoint:App.endpoints) {
+					isUseless = !(endpoint.cacheToLatency.containsKey(cacheID) && endpoint.videoToRequests.containsKey(videoID));
+					if(isUseless)break;
+				}
+				if(isUseless){
+					deleteVideo(videoID, cacheID);
+					ajouterVideosRandom(cacheID);
 				}
 			}
-			isVideoInutile = changement;
+
 		}
 	}
 	
