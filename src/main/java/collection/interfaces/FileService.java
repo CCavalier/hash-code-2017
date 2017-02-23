@@ -5,7 +5,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -13,21 +15,28 @@ import java.util.stream.Stream;
  */
 public class FileService {
 
-    public Optional<String> readFile(URI url){
-        Optional<String> value = Optional.empty() ;
-        try (Stream<String> stream = Files.lines(Paths.get(url))) {
+    public Optional<List<String>> readFile(URI uri){
+    	Optional<List<String>> value = Optional.empty();
 
-            value = stream.findAny();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return value;
+		try (Stream<String> stream = Files.lines(Paths.get(uri))) {
+			List<String> list = stream
+					.collect(Collectors.toList()); // pour en récup une liste
+			value = Optional.of(list);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	return value;
     }
 
     public void writeFile(URI url, String valueToWrite) throws IOException, URISyntaxException {
         Files.write(Paths.get(url), valueToWrite.getBytes());
-        Files.write(Paths.get(url), valueToWrite.getBytes());
+        //Files.write(Paths.get(url), valueToWrite.getBytes());
+        // dans les faits, à la fin on faisait ça :
+		/*
+        URI outputFile = new File(new File(newUrl.toURI()).getParentFile().toURI().getPath()+"resultat.txt").toURI();
+		Files.write(Paths.get(outputFile), valueToWrite.toString().getBytes());
+		*/
+        // mais c'était parce qu'il fallait concaténer le nom du fichier. On garde ça sous le coude
     }
 
 
