@@ -14,13 +14,28 @@ public class IntelligenceCache {
 		// 		- genre virer les vidéos trop grandes pour les caches 
 		//		- et les endpoint reliés à aucun cache
 		
-		// on va quand même mettre la vidéo 1 histoire de
-		Set set = new HashSet<Integer>();
-		set.add(2);
-		cacheToVideos.put(1, set);
+		// on va remplir les vidéos
+		Integer cacheID = 0;
+		for(int videoID = 0; videoID<App.videoSize.size();videoID++) {
+			if(estCeQueCaRentre(cacheID, videoID)) {
+				addVideoToCache(cacheID, videoID);
+			}else {
+				if(cacheID < App.nbCache - 1) {
+					cacheID++;
+				}else {
+					cacheID=0;
+				}
+			}
+		}
 	}
 	
 	// -------------------- garbage utils methods ----------------------------
+	
+	public static boolean estCeQueCaRentre(Integer cacheID, Integer videoID) {
+		Integer tailleRestanteDuCache = App.cacheSize.get(cacheID);
+		
+		return tailleRestanteDuCache >= App.videoSize.get(videoID);
+	}
 	
 	/**
 	 * on ajoute la video videoID au cache cacheID
