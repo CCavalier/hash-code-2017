@@ -44,7 +44,7 @@ public class FileService {
 	public static URI generateURI(String outputFileName) throws URISyntaxException {
 		FileService fileService = new FileService();
 		
-		URL urlInputFile = fileService.getClass().getClassLoader().getResource("kittens.in");
+		URL urlInputFile = fileService.getClass().getClassLoader().getResource(App.FILE_CHOOSEN);
 		
         URI outputFile = new File(new File(urlInputFile.toURI()).toURI().getPath().substring(0, new File(urlInputFile.toURI()).toURI().getPath().lastIndexOf('.'))+".out").toURI();
         

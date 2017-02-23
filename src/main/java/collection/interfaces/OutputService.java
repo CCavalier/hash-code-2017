@@ -17,10 +17,10 @@ public class OutputService {
 	
 	public static void writeOutAllTheThings() throws URISyntaxException {
 		String aEcrire = "";
-		String entryFileName = "kittens.in";
+		String entryFileName = App.FILE_CHOOSEN;
 		String entryFileNamePure = entryFileName.substring(0, entryFileName.indexOf("."));
 		String outputFileName = entryFileNamePure + ".out";
-				
+
 		outputFile = FileService.generateURI(outputFileName);
 		
 		if(outputFile == null) {

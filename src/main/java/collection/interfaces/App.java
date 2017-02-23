@@ -31,12 +31,20 @@ public class App
 
     public static int request;
 
+    public static String KITTEN = "kittens.in";
+
+    public static String ZOO = "me_at_the_zoo.in";
+    public static String TODAY = "trending_today.in";
+    public static String SPREADING = "videos_worth_spreading.in";
+
+    public static  String FILE_CHOOSEN=KITTEN;
+
 
 
 
     public static void main( String[] args ) throws URISyntaxException {
         FileService fileService = new FileService();
-        URL urlInputFile = fileService.getClass().getClassLoader().getResource("kittens.in");
+        URL urlInputFile = fileService.getClass().getClassLoader().getResource(FILE_CHOOSEN);
         int lineRead = 0;
 
         Optional<List<String>> listLines = fileService.readFile(urlInputFile.toURI());
