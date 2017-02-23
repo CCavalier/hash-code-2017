@@ -1,5 +1,6 @@
 package collection.interfaces;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,4 +13,9 @@ public class Endpoint {
     Map<Integer, Integer> cacheToLatency;
 
     Map<Integer, Integer> videoToRequests;
+
+    public Endpoint() {
+        cacheToLatency = new HashMap<>();
+        videoToRequests = new HashMap<>();
+    }
 }

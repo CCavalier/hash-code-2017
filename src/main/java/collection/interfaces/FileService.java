@@ -20,7 +20,7 @@ public class FileService {
 
 		try (Stream<String> stream = Files.lines(Paths.get(uri))) {
 			List<String> list = stream
-					.collect(Collectors.toList()); // pour en récup une liste
+					.collect(Collectors.toList()); // pour en rï¿½cup une liste
 			value = Optional.of(list);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -31,12 +31,12 @@ public class FileService {
     public void writeFile(URI url, String valueToWrite) throws IOException, URISyntaxException {
         Files.write(Paths.get(url), valueToWrite.getBytes());
         //Files.write(Paths.get(url), valueToWrite.getBytes());
-        // dans les faits, à la fin on faisait ça :
+        // dans les faits, ï¿½ la fin on faisait ï¿½a :
 		/*
         URI outputFile = new File(new File(newUrl.toURI()).getParentFile().toURI().getPath()+"resultat.txt").toURI();
 		Files.write(Paths.get(outputFile), valueToWrite.toString().getBytes());
 		*/
-        // mais c'était parce qu'il fallait concaténer le nom du fichier. On garde ça sous le coude
+        // mais c'ï¿½tait parce qu'il fallait concatï¿½ner le nom du fichier. On garde ï¿½a sous le coude
     }
 
 
